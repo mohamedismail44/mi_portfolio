@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image"; 
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
@@ -13,11 +14,13 @@ import parse from "html-react-parser";
 export default function UsersDashboard() {
   const { user, loading } = useAuthListener();
   const router = useRouter();
+  
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
     }
   }, [loading, user, router]);
+  
   const [data, setData] = useState([]);
   const [category, setCategory] = useState([]);
   const [singlePost, setSinglePost] = useState(null);
@@ -52,9 +55,11 @@ export default function UsersDashboard() {
     setSinglePost(post);
     setEditPostToggle(true);
   };
+  
   if (loading) {
     return <p className="text-center">جاري التحقق...</p>;
   }
+  
   return (
     <div className="flex justify-between mb-5 h-[calc(100vh-9rem)]">
       <AdminSidbar />
@@ -67,21 +72,11 @@ export default function UsersDashboard() {
           <thead className="capitalize bg-slate-700 text-white">
             <tr>
               <th className="border border-gray-500 lg:p-3 text-center">#</th>
-              <th className="border border-gray-500 lg:p-3 text-center">
-                Title
-              </th>
-              <th className="border border-gray-500 lg:p-3 text-center">
-                Description
-              </th>
-              <th className="border border-gray-500 lg:p-3 text-center">
-                Category
-              </th>
-              <th className="border border-gray-500 lg:p-3 text-center">
-                Links
-              </th>
-              <th className="border border-gray-500 lg:p-3 text-center">
-                Action
-              </th>
+              <th className="border border-gray-500 lg:p-3 text-center">Title</th>
+              <th className="border border-gray-500 lg:p-3 text-center">Description</th>
+              <th className="border border-gray-500 lg:p-3 text-center">Category</th>
+              <th className="border border-gray-500 lg:p-3 text-center">Links</th>
+              <th className="border border-gray-500 lg:p-3 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -95,10 +90,12 @@ export default function UsersDashboard() {
                 </td>
                 <td className="border py-1 px-5 border-gray-500">
                   <div className="line-clamp-2 flex items-center lg:flex-row lg:justify-start justify-center flex-col gap-2">
-                    <img
+                    <Image
                       className="w-20 h-20 rounded-xl object-cover"
                       src={post?.coverImage[0]?.url || "/images/placeholder.png"}
                       alt={post?.title || "Post Image"}
+                      width={80}
+                      height={80}
                     />
                     <span>{post?.title}</span>
                   </div>
@@ -131,7 +128,7 @@ export default function UsersDashboard() {
                 </td>
                 <td className="p-1 border border-gray-500">
                   <div className="flex justify-around lg:flex-row flex-col gap-4">
-                    <Link href="/profile">
+                    <Link href={`/projects/${post?.id}`}>
                       <button className="bg-green-700 px-3 py-1 font-semibold text-white rounded hover:bg-green-800 duration-300">
                         View Profile
                       </button>

@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import parse from "html-react-parser";
 import { getDataById } from "../../backend/controllers";
 import { ThreeCircles } from "react-loader-spinner";
+import Image from "next/image"; // استيراد مكون Image
 
 export default function CustomSwiper({ params }) {
   const [singlePost, setSinglePost] = useState(null);
@@ -37,7 +38,7 @@ export default function CustomSwiper({ params }) {
   return (
     <div className="md:mx-20 mx-5">
       <div className="flex items-center md:justify-between flex-col md:flex-row gap-5 ">
-        <div className=" md:w-[50%] w-full">
+        <div className="md:w-[50%] w-full">
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             pagination={true}
@@ -48,12 +49,19 @@ export default function CustomSwiper({ params }) {
           >
             {singlePost.postImages.map((slide) => (
               <SwiperSlide key={slide.public_id}>
-                <img src={slide.url} alt="Post Image" className="w-full" />
+                <Image
+                  src={slide.url}
+                  alt="Post Image"
+                  className="w-full"
+                  layout="responsive" // استخدام layout مناسب
+                  width={500} // عرض الصورة
+                  height={300} // ارتفاع الصورة
+                />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        <div className="flex md:flex-col md:justify-center md:gap-5 justify-around  md:w-[35%] w-full">
+        <div className="flex md:flex-col md:justify-center md:gap-5 justify-around md:w-[35%] w-full">
           <a
             href={singlePost?.previewLink}
             target="_blank"

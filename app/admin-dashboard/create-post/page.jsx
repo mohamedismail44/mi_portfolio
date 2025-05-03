@@ -1,4 +1,5 @@
 "use client";
+
 import AdminMain from "../components/AdminMain";
 import AdminSidbar from "../components/AdminSidbar";
 import { useAuthListener } from "../../backend/checkUser";

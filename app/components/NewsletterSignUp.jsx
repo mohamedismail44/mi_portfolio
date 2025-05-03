@@ -27,7 +27,7 @@ const NewsletterSignUp = () => {
             Sign up for our newsletter
           </h2>
           <p className="mx-auto mb-3 max-w-2xl font-light text-gray-500 md:mb-4 sm:text-xl dark:text-ternary-light">
-            Be the first to know about my latest projects and work. If you're
+            Be the first to know about my latest projects and work. If you&apos;re
             interested, please enter your email below!
           </p>
           <form onSubmit={handleSubmit}>

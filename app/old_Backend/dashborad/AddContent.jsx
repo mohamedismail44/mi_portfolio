@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image"; 
 
 function AddContent({
   title,
@@ -95,7 +96,7 @@ function AddContent({
         </div>
       </div>
       {/* ............................................................. */}
-      <div className="flex justify-center mt-3  ">
+      <div className="flex justify-center mt-3">
         <button
           onClick={() => {
             if (password === "123") {
@@ -103,25 +104,23 @@ function AddContent({
               handleUpload();
             }
           }}
-          className=" w-1/2 bg-rose-600 p-3 rounded-lg duration-500 text-xl  font-semibold hover:bg-rose-800"
+          className="w-1/2 bg-rose-600 p-3 rounded-lg duration-500 text-xl font-semibold hover:bg-rose-800"
         >
-          Pubish Post
+          Publish Post
         </button>
       </div>
       {/* ............................................... */}
-      {/* ............................................... */}
-      {/* ............................................... */}
       {isUploading && <p>Uploading...</p>}
       {posts.map((url, index) => (
-        <img
+        <Image
           key={index}
           src={url}
           alt={`Uploaded preview ${index}`}
-          style={{ width: "150px", margin: "10px" }}
+          width={150} // عرض الصورة
+          height={150} // ارتفاع الصورة
+          style={{ margin: "10px" }}
         />
       ))}
-      {/* ............................................... */}
-      {/* ............................................... */}
       {/* ............................................... */}
     </div>
   );

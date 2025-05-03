@@ -66,7 +66,6 @@ function Dashboard() {
   // const [oneTodoData, setOneTodoData] = useState(false);
 
   // --------------------------- get all Data --------------------------------------
-
   useEffect(() => {
     const unsubscribe = onSnapshot(colRef, (snapshot) => {
       const documents = snapshot.docs.map((doc) => ({
@@ -78,7 +77,7 @@ function Dashboard() {
     });
 
     return unsubscribe;
-  }, []);
+  }, [colRef]);
 
   // --------------------------- post Data --------------------------------------
   const postData = async () => {

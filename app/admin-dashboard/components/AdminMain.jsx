@@ -1,25 +1,29 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import CreatePost from "./CreatePost";
 import { ThreeCircles } from "react-loader-spinner";
 import { postData } from "../../backend/controllers";
 import swal from "sweetalert";
+
+// استيراد CreatePost ديناميكيًّا مع تعطيل SSR
+const DynamicCreatePost = dynamic(
+  () => import("./CreatePost"),
+  { ssr: false }
+);
 
 export default function AdminMain() {
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
 
   const categoryHandler = async () => {
-    // Validate category input
     if (category.trim() === "") {
       return toast.error("Category is required");
     }
-    // post data in firebase
     try {
       setLoading(true);
-      postData("category", { title: category });
-      // Reset state and show success message
+      await postData("category", { title: category });
       setCategory("");
       toast.success("Data uploaded successfully");
     } catch (error) {
@@ -43,7 +47,8 @@ export default function AdminMain() {
 
   return (
     <div className="flex-[10]">
-      <CreatePost />
+      {/* استخدام المكوّن الديناميكي */}
+      <DynamicCreatePost />
 
       <div className="border-b-2 border-gray-600 rounded-xl my-5 w-[90%] m-auto"></div>
 

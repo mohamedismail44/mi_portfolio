@@ -1,26 +1,33 @@
 "use client";
+
 import Link from "next/link";
-import Image from "next/image"; 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
 import AdminSidbar from "../components/AdminSidbar";
-import EditPost from "./EditPost";
+import dynamic from "next/dynamic";
 import { deleteDataById, getData } from "../../backend/controllers";
 import { useAuthListener } from "../../backend/checkUser";
 import { useRouter } from "next/navigation";
 import parse from "html-react-parser";
 
+// استيراد ديناميكي لمكوّن EditPost مع تعطيل SSR
+const DynamicEditPost = dynamic(
+  () => import("./EditPost"),
+  { ssr: false }
+);
+
 export default function UsersDashboard() {
   const { user, loading } = useAuthListener();
   const router = useRouter();
-  
+
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
     }
   }, [loading, user, router]);
-  
+
   const [data, setData] = useState([]);
   const [category, setCategory] = useState([]);
   const [singlePost, setSinglePost] = useState(null);
@@ -55,11 +62,11 @@ export default function UsersDashboard() {
     setSinglePost(post);
     setEditPostToggle(true);
   };
-  
+
   if (loading) {
     return <p className="text-center">جاري التحقق...</p>;
   }
-  
+
   return (
     <div className="flex justify-between mb-5 h-[calc(100vh-9rem)]">
       <AdminSidbar />
@@ -154,7 +161,7 @@ export default function UsersDashboard() {
       </div>
 
       {editPostToggle && (
-        <EditPost
+        <DynamicEditPost
           singlePost={singlePost}
           setEditPostToggle={setEditPostToggle}
           category={category}

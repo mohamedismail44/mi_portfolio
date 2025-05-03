@@ -128,7 +128,7 @@ const NavLinks = () => (
     <LinkItem href="/projects" label="Projects" />
     <LinkItem href="/about" label="About Me" />
     <LinkItem href="/contact" label="Contact" />
-    <LinkItem href="/admin-dashboard" label="Dashboard" />
+    {/* <LinkItem href="/admin-dashboard" label="Dashboard" /> */}
   </>
 );
 

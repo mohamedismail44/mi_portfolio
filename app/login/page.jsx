@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { handleLogin, handleSignUp } from "../backend/auth";
+// import { handleSignUp } from "../backend/auth";
+import { handleLogin } from "../backend/auth";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { useAuthListener } from "../backend/checkUser";
@@ -58,13 +59,13 @@ export default function Login() {
           Login
         </button>
         {/* SignUp code */}
-        <button
-              type="button"
-              className="inline-block rounded border border-green-600 px-12 py-3 text-sm font-medium text-green-600 hover:bg-green-600 hover:text-white focus:outline-none focus:ring active:bg-green-500"
-              onClick={() => handleSignUp(email, password)}
-            >
-              Signup
-            </button>
+        {/* <button
+          type="button"
+          className="inline-block rounded border border-green-600 px-12 py-3 text-sm font-medium text-green-600 hover:bg-green-600 hover:text-white focus:outline-none focus:ring active:bg-green-500"
+          onClick={() => handleSignUp(email, password)}
+        >
+          Signup
+        </button> */}
         <div className="flex justify-end w-full">
           <Link
             href="/"

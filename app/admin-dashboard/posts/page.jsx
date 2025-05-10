@@ -13,10 +13,7 @@ import { useRouter } from "next/navigation";
 import parse from "html-react-parser";
 
 // استيراد ديناميكي لمكوّن EditPost مع تعطيل SSR
-const DynamicEditPost = dynamic(
-  () => import("./EditPost"),
-  { ssr: false }
-);
+const DynamicEditPost = dynamic(() => import("./EditPost"), { ssr: false });
 
 export default function UsersDashboard() {
   const { user, loading } = useAuthListener();
@@ -79,11 +76,21 @@ export default function UsersDashboard() {
           <thead className="capitalize bg-slate-700 text-white">
             <tr>
               <th className="border border-gray-500 lg:p-3 text-center">#</th>
-              <th className="border border-gray-500 lg:p-3 text-center">Title</th>
-              <th className="border border-gray-500 lg:p-3 text-center">Description</th>
-              <th className="border border-gray-500 lg:p-3 text-center">Category</th>
-              <th className="border border-gray-500 lg:p-3 text-center">Links</th>
-              <th className="border border-gray-500 lg:p-3 text-center">Action</th>
+              <th className="border border-gray-500 lg:p-3 text-center">
+                Title
+              </th>
+              <th className="border border-gray-500 lg:p-3 text-center">
+                Description
+              </th>
+              <th className="border border-gray-500 lg:p-3 text-center">
+                Category
+              </th>
+              <th className="border border-gray-500 lg:p-3 text-center">
+                Links
+              </th>
+              <th className="border border-gray-500 lg:p-3 text-center">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -99,7 +106,9 @@ export default function UsersDashboard() {
                   <div className="line-clamp-2 flex items-center lg:flex-row lg:justify-start justify-center flex-col gap-2">
                     <Image
                       className="w-20 h-20 rounded-xl object-cover"
-                      src={post?.coverImage[0]?.url || "/images/placeholder.png"}
+                      src={
+                        post?.coverImage[0]?.url || "/images/placeholder.png"
+                      }
                       alt={post?.title || "Post Image"}
                       width={80}
                       height={80}
@@ -108,10 +117,14 @@ export default function UsersDashboard() {
                   </div>
                 </td>
                 <td className="p-1 border border-gray-500 text-center">
-                  <span className="line-clamp-2">{parse(post?.description)}</span>
+                  <span className="line-clamp-2">
+                    {parse(post?.description)}
+                  </span>
                 </td>
                 <td className="p-1 border border-gray-500 text-center">
-                  <span className="line-clamp-2">{post?.category}</span>
+                  <span className="">{post?.category}</span>
+                  <br />
+                  <span className="text-red-600">order:{post?.order}</span>
                 </td>
                 <td className="p-1 border border-gray-500 text-center">
                   <div className="flex gap-2 justify-center">

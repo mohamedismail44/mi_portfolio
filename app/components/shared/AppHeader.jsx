@@ -37,14 +37,13 @@ function AppHeader() {
           <Link href="/">
             <div className="">
               <span className="uppercase font-bold md:text-5xl text-3xl text-indigo-500">
-              𝓜𝓘
-                         </span>
+                𝒨𝒾
+              </span>
               <span className="ml-1 font-bold md:text-3xl text-xl text-indigo-800 dark:text-indigo-300">
                 Portfolio
               </span>
             </div>
           </Link>
-
           <div
             onClick={() => setTheme(activeTheme)}
             aria-label="Theme Switcher"

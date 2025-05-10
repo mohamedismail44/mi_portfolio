@@ -7,6 +7,8 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -45,14 +47,31 @@ export const updateDataById = async (collectionName, newData, id) => {
 };
 
 // --------------------------- Get All Documents ------------------------------
+
+// // .......get data sort by time .......
+// export const getData = (collectionName, setData) => {
+//   const colRef = collection(db, collectionName);
+//   const unsubscribe = onSnapshot(colRef, (snapshot) => {
+//     const fetchedData = snapshot.docs.map((doc) => ({
+//       id: doc.id,
+//       ...doc.data(),
+//     }));
+//     // console.log("documents", fetchedData);
+//     setData(fetchedData);
+//   });
+//   return unsubscribe;
+// };
+
+// .......get data sort by order number .......
 export const getData = (collectionName, setData) => {
   const colRef = collection(db, collectionName);
-  const unsubscribe = onSnapshot(colRef, (snapshot) => {
+  const q = query(colRef, orderBy("order")); // ترتيب حسب order
+
+  const unsubscribe = onSnapshot(q, (snapshot) => {
     const fetchedData = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    // console.log("documents", fetchedData);
     setData(fetchedData);
   });
 

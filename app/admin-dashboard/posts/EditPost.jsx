@@ -12,6 +12,7 @@ import JoditEditor from "jodit-react";
 
 export default function EditPost({ setEditPostToggle, singlePost, category }) {
   const [title, setTitle] = useState(singlePost.title);
+  const [order, setOrder] = useState(singlePost.order);
   const [newCategory, setNewCategory] = useState(singlePost.category);
   const [previewLink, setPreviewLink] = useState(singlePost.previewLink);
   const [githubLink, setGithubLink] = useState(singlePost.githubLink);
@@ -53,6 +54,7 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
 
       const data = {
         title,
+        order,
         category: newCategory,
         previewLink,
         githubLink,
@@ -98,13 +100,22 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
           </span>
         </div>
         <form onSubmit={submitHandler} className="flex flex-col gap-3">
-          <input
-            className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2"
-            placeholder="Post Title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          <div className="w-full flex justify-between">
+            <input
+              className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[89%]"
+              placeholder="Post Title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:text-xs w-[10%]"
+              placeholder="Order Number"
+              type="number"
+              value={order}
+              onChange={(e) => setOrder(e.target.value)}
+            />
+          </div>
           <select
             className="cursor-pointer border-2 rounded-lg border-gray-300 p-3"
             value={newCategory}

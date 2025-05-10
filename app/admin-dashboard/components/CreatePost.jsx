@@ -11,6 +11,7 @@ import JoditEditor from "jodit-react";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
+  const [order, setOrder] = useState(10);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [previewLink, setPreviewLink] = useState("");
@@ -61,6 +62,7 @@ export default function CreatePost() {
 
       const data = {
         title,
+        order,
         category,
         description,
         previewLink,
@@ -102,13 +104,23 @@ export default function CreatePost() {
         <h1>Create new post</h1>
       </div>
       <form onSubmit={submitHandler} className="flex flex-col gap-3">
-        <input
-          className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2"
-          placeholder="Post Title"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <div className="w-full flex justify-between">
+          <input
+            className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[89%]"
+            placeholder="Post Title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:text-xs w-[10%]"
+            placeholder="Order Number"
+            type="number"
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+          />
+        </div>
+
         <select
           className="border-2 rounded-lg border-gray-300 p-3"
           value={category}
@@ -181,7 +193,7 @@ export default function CreatePost() {
               visible={true}
               height="40"
               width="40"
-              color="#0284c7"
+              color="#bbf7d0"
               ariaLabel="three-circles-loading"
             />
           ) : (

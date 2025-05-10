@@ -15,6 +15,7 @@ const DynamicCreatePost = dynamic(
 
 export default function AdminMain() {
   const [category, setCategory] = useState("");
+    // const [order, setOrder] = useState(10);
   const [loading, setLoading] = useState(false);
 
   const categoryHandler = async () => {
@@ -23,7 +24,7 @@ export default function AdminMain() {
     }
     try {
       setLoading(true);
-      await postData("category", { title: category });
+      await postData("category", { title: category ,order:10});
       setCategory("");
       toast.success("Data uploaded successfully");
     } catch (error) {

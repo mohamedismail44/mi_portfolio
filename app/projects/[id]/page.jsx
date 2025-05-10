@@ -36,7 +36,7 @@ export default function CustomSwiper({ params }) {
   }
 
   return (
-    <div className="md:mx-20 mx-5">
+    <div className="md:mx-20 ">
       <div className="flex items-center md:justify-between flex-col md:flex-row gap-5 ">
         <div className="md:w-[50%] w-full">
           <Swiper

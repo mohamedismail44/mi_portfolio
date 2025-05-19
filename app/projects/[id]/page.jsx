@@ -78,9 +78,9 @@ export default function CustomSwiper({ params }) {
           </a>
         </div>
       </div>
-      <div className="flex justify-center items-center w-full">
+      <div className="flex justify-center items-center w-full mt-7 mb-5">
         <span className="md:w-[70%] text-center dark:text-white">
-          {parse(singlePost.description)}
+          {parse(singlePost.description.en)}
         </span>
       </div>
     </div>

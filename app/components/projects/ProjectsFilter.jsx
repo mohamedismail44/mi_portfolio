@@ -43,9 +43,9 @@ function ProjectsFilter({ setSelectProject }) {
         <option
           className="text-normal sm:text-md"
           key={option.id}
-          value={option.title}
+          value={option.title.en}
         >
-          {option.title}
+          {option.title.en}
         </option>
       ))}
     </select>

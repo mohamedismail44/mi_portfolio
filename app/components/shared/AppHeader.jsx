@@ -55,6 +55,7 @@ function AppHeader() {
               <FiSun className="text-gray-200 hover:text-gray-50 text-xl" />
             )}
           </div>
+
           <button
             onClick={showHireMeModal}
             className="sm:hidden font-general-medium block text-md bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm  px-4 py-2 rounded-md duration-300 w-24"
@@ -102,6 +103,26 @@ function AppHeader() {
           >
             Hire Me
           </button>
+
+          <div>
+            <label className="flex gap-1 mx-3 " htmlFor="language">
+              <span className="text-sm font-medium text-gray-700">
+                language
+              </span>
+              <select
+                name="language"
+                id="language"
+                className="mt-0.5 text-center w-full rounded border border-indigo-500 shadow-sm sm:text-sm"
+              >
+                <option value="" disabled>
+                  language
+                </option>
+                <option value="en">English</option>
+                <option value="ar">عربي</option>
+              </select>
+            </label>
+          </div>
+
           <div
             onClick={() => setTheme(activeTheme)}
             aria-label="Theme Switcher"

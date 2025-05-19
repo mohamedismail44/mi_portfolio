@@ -10,10 +10,12 @@ import swal from "sweetalert";
 import JoditEditor from "jodit-react";
 
 export default function CreatePost() {
-  const [title, setTitle] = useState("");
+  const [enTitle, setEnTitle] = useState("");
+  const [arTitle, setArTitle] = useState("");
   const [order, setOrder] = useState(10);
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(null);
+  const [enDescription, setEnDescription] = useState("");
+  const [arDescription, setArDescription] = useState("");
   const [previewLink, setPreviewLink] = useState("");
   const [githubLink, setGithubLink] = useState("");
   const [categoriesFromDB, setCategoriesFromDB] = useState([]);
@@ -26,45 +28,37 @@ export default function CreatePost() {
   }, []);
 
   const createPostHandler = async () => {
-    if (title.trim() === "") return toast.error("Post Title is required");
-    if (category.trim() === "") return toast.error("Post Category is required");
-    // ........validate links .........
-    if (!previewLink.trim()) {
-      return toast.error("preview Link is required");
-    }
+    if (!enTitle.trim()) return toast.error("Post EN Title is required");
+    if (!arTitle.trim()) return toast.error("Post AR Title is required");
+    if (!category) return toast.error("Post Category is required");
+
     const previewUrlPattern = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/i;
-    if (!previewUrlPattern.test(previewLink.trim())) {
+    if (!previewLink.trim() || !previewUrlPattern.test(previewLink.trim())) {
       return toast.error("Please enter a valid preview link URL");
     }
-    // ....................
-    if (!githubLink.trim()) {
-      return toast.error("github Link is required");
-    }
-    const githubUrlPattern = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/i;
-    if (!githubUrlPattern.test(githubLink.trim())) {
-      return toast.error("Please enter a valid github link URL");
-    }
-    // ........validate links .........
 
-    if (description.trim() === "")
-      return toast.error("Post description is required");
-    if (previewLink.trim() === "")
-      return toast.error("preview Link is required");
-    if (githubLink.trim() === "") return toast.error("github Link is required");
+    const githubUrlPattern = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/i;
+    if (!githubLink.trim() || !githubUrlPattern.test(githubLink.trim())) {
+      return toast.error("Please enter a valid GitHub link URL");
+    }
+
+    if (!enDescription.trim())
+      return toast.error("Post EN description is required");
+    if (!arDescription.trim())
+      return toast.error("Post AR description is required");
     if (!coverImage.length) return toast.error("Cover Image is required");
     if (!postImages.length) return toast.error("Post Images are required");
 
     try {
       setIsUploading(true);
-
       const coverUrls = await uploadImagesToCloudinary(coverImage);
       const postUrls = await uploadImagesToCloudinary(postImages);
 
       const data = {
-        title,
+        title: { en: enTitle, ar: arTitle },
         order,
-        category,
-        description,
+        category: { en: category.en, ar: category.ar },
+        description: { en: enDescription, ar: arDescription },
         previewLink,
         githubLink,
         coverImage: coverUrls,
@@ -72,14 +66,7 @@ export default function CreatePost() {
       };
 
       await postData("posts", data);
-
-      setTitle("");
-      setCategory("");
-      setPreviewLink("");
-      setGithubLink("");
-      setDescription("");
-      setCoverImage([]);
-      setPostImages([]);
+      resetForm();
       toast.success("Data uploaded successfully");
     } catch (error) {
       toast.error(error.message);
@@ -87,6 +74,19 @@ export default function CreatePost() {
       setIsUploading(false);
     }
   };
+
+  const resetForm = () => {
+    setEnTitle("");
+    setArTitle("");
+    setCategory("");
+    setPreviewLink("");
+    setGithubLink("");
+    setEnDescription("");
+    setArDescription("");
+    setCoverImage([]);
+    setPostImages([]);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     swal({
@@ -98,19 +98,27 @@ export default function CreatePost() {
       if (isOk) createPostHandler();
     });
   };
+
   return (
-    <section className="flex flex-col m-auto md:w-1/2 w-11/12 ">
+    <section className="flex flex-col m-auto md:w-1/2 w-11/12">
       <div className="font-bold text-center text-3xl my-5 dark:text-white">
         <h1>Create new post</h1>
       </div>
       <form onSubmit={submitHandler} className="flex flex-col gap-3">
         <div className="w-full flex justify-between">
           <input
-            className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[89%]"
-            placeholder="Post Title"
+            className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[44%]"
+            placeholder="English Title"
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={enTitle}
+            onChange={(e) => setEnTitle(e.target.value)}
+          />
+          <input
+            className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[44%]"
+            placeholder="Arabic Title"
+            type="text"
+            value={arTitle}
+            onChange={(e) => setArTitle(e.target.value)}
           />
           <input
             className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:text-xs w-[10%]"
@@ -123,40 +131,90 @@ export default function CreatePost() {
 
         <select
           className="border-2 rounded-lg border-gray-300 p-3"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={JSON.stringify(category)}
+          onChange={(e) => setCategory(JSON.parse(e.target.value))}
         >
           <option disabled value="">
-            Categories
+            Select Category
           </option>
           {categoriesFromDB.map((cate) => (
-            <option key={cate?.id} value={cate.title}>
-              {cate.title}
+            <option
+              key={cate?.id}
+              value={JSON.stringify({ en: cate?.title.en, ar: cate?.title.ar })}
+            >
+              {cate?.title.en} / {cate?.title.ar}
             </option>
           ))}
         </select>
+
         <input
           className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2"
-          placeholder="preview Link"
+          placeholder="Preview Link"
           type="text"
           value={previewLink}
           onChange={(e) => setPreviewLink(e.target.value)}
         />
         <input
           className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2"
-          placeholder="github Link"
+          placeholder="GitHub Link"
           type="text"
           value={githubLink}
           onChange={(e) => setGithubLink(e.target.value)}
         />
 
-        <JoditEditor
-          value={description}
-          onChange={(newContent) => setDescription(newContent)}
-        />
+        <div className="space-y-4">
+          <details className="cursor-pointer group" >
+            <summary className="flex items-center justify-between gap-1.5 rounded-md border border-gray-100 bg-gray-50 p-4 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+              <h2 className="text-lg font-medium">English Description</h2>
+              <svg
+                className="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <JoditEditor
+              value={enDescription}
+              onChange={(newContent) => setEnDescription(newContent)}
+            />
+          </details>
+
+          <details className="cursor-pointer group" >
+            <summary className="flex items-center justify-between gap-1.5 rounded-md border border-gray-100 bg-gray-50 p-4 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+              <h2 className="text-lg font-medium">Arabic Description</h2>
+              <svg
+                className="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <JoditEditor
+              value={arDescription}
+              onChange={(newContent) => setArDescription(newContent)}
+            />
+          </details>
+        </div>
+
         <label
           htmlFor="uploadOneImage"
-          className="flex justify-center gap-3 items-center capitalize py-2 bg-lime-400 border-2  rounded-lg border-lime-600 hover:bg-lime-500 font-semibold text-lg  text-gray-800 cursor-pointer duration-400"
+          className="flex justify-center gap-3 items-center capitalize py-2 bg-lime-400 border-2 rounded-lg border-lime-600 hover:bg-lime-500 font-semibold text-lg text-gray-800 cursor-pointer duration-400"
         >
           One <IoCloudUploadOutline className="text-3xl" /> choose image for
           cover
@@ -166,12 +224,12 @@ export default function CreatePost() {
           className="hidden"
           type="file"
           id="uploadOneImage"
-          name="uploadOneImage"
           onChange={(e) => setCoverImage(Array.from(e.target.files))}
         />
+
         <label
           htmlFor="uploadMultiImage"
-          className="flex justify-center gap-3 items-center capitalize py-2 bg-yellow-400 border-2  rounded-lg border-yellow-600 hover:bg-yellow-500 font-semibold text-lg  text-gray-800 cursor-pointer duration-400"
+          className="flex justify-center gap-3 items-center capitalize py-2 bg-yellow-400 border-2 rounded-lg border-yellow-600 hover:bg-yellow-500 font-semibold text-lg text-gray-800 cursor-pointer duration-400"
         >
           Multi <FaUpload className="text-3xl" /> choose images for post details
         </label>
@@ -181,12 +239,12 @@ export default function CreatePost() {
           className="hidden"
           type="file"
           id="uploadMultiImage"
-          name="uploadMultiImage"
           onChange={(e) => setPostImages(Array.from(e.target.files))}
         />
+
         <button
           type="submit"
-          className="flex justify-center cursor-pointer border-2 rounded-lg border-gray-300 bg-slate-700 pl-3 py-2 hover:bg-slate-800 duration-300 text-white text-xl font-semibold "
+          className="flex justify-center cursor-pointer border-2 rounded-lg border-gray-300 bg-slate-700 pl-3 py-2 hover:bg-slate-800 duration-300 text-white text-xl font-semibold"
         >
           {isUploading ? (
             <ThreeCircles

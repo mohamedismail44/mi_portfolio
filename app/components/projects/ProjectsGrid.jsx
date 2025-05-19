@@ -32,11 +32,11 @@ function ProjectsGrid() {
   }
 
   const filteredProjects = posts.filter((item) => {
-    const titleMatch = item.title
+    const titleMatch = item.title.en
       .toLowerCase()
       .includes(searchProject.toLowerCase());
     const categoryMatch = selectProject
-      ? item.category.charAt(0).toUpperCase() + item.category.slice(1) ===
+      ? item.category.en.charAt(0).toUpperCase() + item.category.en.slice(1) ===
         selectProject
       : true;
     return titleMatch && categoryMatch;

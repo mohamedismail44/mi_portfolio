@@ -8,24 +8,29 @@ import { postData } from "../../backend/controllers";
 import swal from "sweetalert";
 
 // استيراد CreatePost ديناميكيًّا مع تعطيل SSR
-const DynamicCreatePost = dynamic(
-  () => import("./CreatePost"),
-  { ssr: false }
-);
+const DynamicCreatePost = dynamic(() => import("./CreatePost"), { ssr: false });
 
 export default function AdminMain() {
-  const [category, setCategory] = useState("");
-    // const [order, setOrder] = useState(10);
+  const [enCategory, setEnCategory] = useState("");
+  const [arCategory, setArCategory] = useState("");
+  // const [order, setOrder] = useState(10);
   const [loading, setLoading] = useState(false);
 
   const categoryHandler = async () => {
-    if (category.trim() === "") {
-      return toast.error("Category is required");
+    if (enCategory.trim() === "") {
+      return toast.error("EN Category is required");
+    }
+    if (arCategory.trim() === "") {
+      return toast.error("AR Category is required");
     }
     try {
       setLoading(true);
-      await postData("category", { title: category ,order:10});
-      setCategory("");
+      await postData("category", {
+        title: { en: enCategory, ar: arCategory },
+        order: 10,
+      });
+      setEnCategory("");
+      setArCategory("");
       toast.success("Data uploaded successfully");
     } catch (error) {
       toast.error(error.message);
@@ -67,15 +72,24 @@ export default function AdminMain() {
         >
           Category Title
         </label>
-
-        <input
-          className="border-2 px-2 rounded-lg border-gray-300 py-2 placeholder:p-2 w-full"
-          placeholder="Enter Category Title"
-          type="text"
-          id="Title"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
+        <div className="flex justify-between">
+          <input
+            className="border-2 px-2 rounded-lg border-gray-300 py-2 placeholder:p-2 w-[49%]"
+            placeholder="Enter EN Category Title"
+            type="text"
+            id="Title"
+            value={enCategory}
+            onChange={(e) => setEnCategory(e.target.value)}
+          />
+          <input
+            className="border-2 px-2 rounded-lg border-gray-300 py-2 placeholder:p-2 w-[49%]"
+            placeholder="Enter AR Category Title"
+            type="text"
+            id="Title"
+            value={arCategory}
+            onChange={(e) => setArCategory(e.target.value)}
+          />
+        </div>
 
         <button
           type="submit"

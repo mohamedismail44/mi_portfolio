@@ -113,16 +113,16 @@ export default function UsersDashboard() {
                       width={80}
                       height={80}
                     />
-                    <span>{post?.title}</span>
+                    <span>{post?.title.en}</span>
                   </div>
                 </td>
                 <td className="p-1 border border-gray-500 text-center">
                   <span className="line-clamp-2">
-                    {parse(post?.description)}
+                    {parse(post?.description.en)}
                   </span>
                 </td>
                 <td className="p-1 border border-gray-500 text-center">
-                  <span className="">{post?.category}</span>
+                  <span className="">{post?.category.en}</span>
                   <br />
                   <span className="text-red-600">order:{post?.order}</span>
                 </td>

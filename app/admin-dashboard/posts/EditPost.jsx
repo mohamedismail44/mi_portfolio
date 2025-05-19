@@ -11,19 +11,22 @@ import swal from "sweetalert";
 import JoditEditor from "jodit-react";
 
 export default function EditPost({ setEditPostToggle, singlePost, category }) {
-  const [title, setTitle] = useState(singlePost.title);
+  const [enTitle, setEnTitle] = useState(singlePost.title.en);
+  const [arTitle, setArTitle] = useState(singlePost.title.ar);
+  const [enDescription, setEnDescription] = useState(singlePost.description.en);
+  const [arDescription, setArDescription] = useState(singlePost.description.ar);
   const [order, setOrder] = useState(singlePost.order);
   const [newCategory, setNewCategory] = useState(singlePost.category);
   const [previewLink, setPreviewLink] = useState(singlePost.previewLink);
   const [githubLink, setGithubLink] = useState(singlePost.githubLink);
-  const [description, setDescription] = useState(singlePost.description);
   const [postImages, setPostImages] = useState([]);
   const [coverImage, setCoverImage] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
 
   const updateHandler = async () => {
-    if (!title.trim()) return toast.error("Post Title is required");
-    if (!newCategory.trim()) return toast.error("Post category is required");
+    if (enTitle.trim() === "") return toast.error("Post EN Title is required");
+    if (arTitle.trim() === "") return toast.error("Post AR Title is required");
+    if (!newCategory) return toast.error("Post category is required");
     // ........validate links .........
     if (!previewLink.trim()) {
       return toast.error("preview Link is required");
@@ -42,8 +45,10 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
     }
     // ........validate links .........
 
-    if (!description.trim()) return toast.error("Post description is required");
-
+    if (enDescription.trim() === "")
+      return toast.error("Post en description is required");
+    if (arDescription.trim() === "")
+      return toast.error("Post ar description is required");
     setIsUploading(true);
 
     try {
@@ -53,12 +58,12 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
         postImages.length > 0 ? await uploadImagesToCloudinary(postImages) : [];
 
       const data = {
-        title,
+        title: { en: enTitle, ar: arTitle },
         order,
         category: newCategory,
         previewLink,
         githubLink,
-        description,
+        description: { en: enDescription, ar: arDescription },
         ...(coverUrls.length > 0 && { coverImage: coverUrls }),
         ...(postUrls.length > 0 && { postImages: postUrls }),
       };
@@ -102,11 +107,18 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
         <form onSubmit={submitHandler} className="flex flex-col gap-3">
           <div className="w-full flex justify-between">
             <input
-              className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[89%]"
-              placeholder="Post Title"
+              className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[44%]"
+              placeholder="English Title"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={enTitle}
+              onChange={(e) => setEnTitle(e.target.value)}
+            />
+            <input
+              className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:p-2 w-[44%]"
+              placeholder="Arabic Title"
+              type="text"
+              value={arTitle}
+              onChange={(e) => setArTitle(e.target.value)}
             />
             <input
               className="border-2 px-3 rounded-lg border-gray-300 p-2 placeholder:text-xs w-[10%]"
@@ -118,15 +130,21 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
           </div>
           <select
             className="cursor-pointer border-2 rounded-lg border-gray-300 p-3"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
+            value={JSON.stringify(newCategory)}
+            onChange={(e) => setNewCategory(JSON.parse(e.target.value))}
           >
             <option disabled value="">
               Categories
             </option>
             {category.map((cate) => (
-              <option key={cate?.id} value={cate?.title}>
-                {cate?.title}
+              <option
+                key={cate?.id}
+                value={JSON.stringify({
+                  en: cate?.title.en,
+                  ar: cate?.title.ar,
+                })}
+              >
+                {cate?.title.en} / {cate?.title.ar}
               </option>
             ))}
           </select>
@@ -144,10 +162,65 @@ export default function EditPost({ setEditPostToggle, singlePost, category }) {
             value={githubLink}
             onChange={(e) => setGithubLink(e.target.value)}
           />
-          <JoditEditor
-            value={description}
-            onChange={(newContent) => setDescription(newContent)}
-          />
+
+          <div className="space-y-4">
+            <details
+              className="cursor-pointer group [&_summary::-webkit-details-marker]:hidden"
+              
+            >
+              <summary className="flex items-center justify-between gap-1.5 rounded-md border border-gray-100 bg-gray-50 p-4 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                <h2 className="text-lg font-medium">English Description</h2>
+
+                <svg
+                  className="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </summary>
+
+              <JoditEditor
+                value={enDescription}
+                onChange={(newContent) => setEnDescription(newContent)}
+              />
+            </details>
+            <details
+              className="cursor-pointer group [&_summary::-webkit-details-marker]:hidden"
+              
+            >
+              <summary className="flex items-center justify-between gap-1.5 rounded-md border border-gray-100 bg-gray-50 p-4 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                <h2 className="text-lg font-medium">Arabic Description</h2>
+
+                <svg
+                  className="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </summary>
+
+              <JoditEditor
+                value={arDescription}
+                onChange={(newContent) => setArDescription(newContent)}
+              />
+            </details>
+          </div>
 
           {/* Cover Image */}
           <label

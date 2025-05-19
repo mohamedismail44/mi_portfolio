@@ -68,7 +68,7 @@ export default function CategoriesDashboard() {
                 <td className="border border-gray-500 p-2">{index + 1}</td>
                 <td className="border p-1 border-gray-500">
                   <div className="flex items-center lg:flex-row lg:justify-start justify-center flex-col gap-2">
-                    <span>{categ.title}</span>
+                    <span>{categ.title.en}</span>
                   </div>
                 </td>
                 <td className="p-1 border border-gray-500">

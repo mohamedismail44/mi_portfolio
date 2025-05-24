@@ -31,7 +31,7 @@ const NewsletterSignUp = () => {
             interested, please enter your email below!
           </p>
           <form onSubmit={handleSubmit}>
-            <div className="items-center mx-auto space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
+            <div className=" items-center mx-auto space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
               <div className="relative w-full">
                 <label
                   htmlFor="email"
@@ -63,7 +63,7 @@ const NewsletterSignUp = () => {
               <div>
                 <button
                   type="submit"
-                  className="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer  border-indigo-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-indigo-300 bg-indigo-500 hover:bg-indigo-600 shadow-sm duration-300"
+                  className="py-3 px-5 w-full text-sm font-medium text-center text-white  border cursor-pointer  border-indigo-600 sm:rounded-none  hover:bg-primary-800 focus:ring-4 focus:ring-indigo-300 bg-indigo-500 hover:bg-indigo-600 shadow-sm duration-300"
                 >
                   Subscribe
                 </button>

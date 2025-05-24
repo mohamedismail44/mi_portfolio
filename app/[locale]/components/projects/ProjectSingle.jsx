@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 const ProjectSingle = (props) => {
+  const locale = useLocale();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -25,10 +28,10 @@ const ProjectSingle = (props) => {
           </div>
           <div className="text-center px-4 py-6">
             <p className="font-general-medium text-xl md:text-2xl text-ternary-dark dark:text-ternary-light mb-2 line-clamp-1">
-              {props.title.en}
+              {locale === "en" ? props.title.en : props.title.ar}
             </p>
             <span className="text-lg text-red-600 font-medium ">
-              {props.category.en}
+              {locale === "en" ? props.category.en : props.category.ar}
             </span>
           </div>
         </div>

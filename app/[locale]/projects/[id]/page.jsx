@@ -9,10 +9,12 @@ import parse from "html-react-parser";
 import { getDataById } from "../../backend/controllers";
 import { ThreeCircles } from "react-loader-spinner";
 import Image from "next/image"; // استيراد مكون Image
+import { useLocale } from "next-intl";
 
 export default function CustomSwiper({ params }) {
   const [singlePost, setSinglePost] = useState(null);
   const postID = use(params).id;
+  const locale = useLocale();
 
   useEffect(() => {
     getDataById("posts", postID, setSinglePost);
@@ -80,7 +82,11 @@ export default function CustomSwiper({ params }) {
       </div>
       <div className="flex justify-center items-center w-full mt-7 mb-5">
         <span className="md:w-[70%] text-center dark:text-white">
-          {parse(singlePost.description.en)}
+          {parse(
+            locale === "en"
+              ? singlePost.description.en
+              : singlePost.description.ar
+          )}
         </span>
       </div>
     </div>

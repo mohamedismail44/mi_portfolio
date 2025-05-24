@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiSun, FiMoon, FiX, FiMenu } from "react-icons/fi";
-import { SiGoogletranslate } from "react-icons/si";
+import { MdLanguage } from "react-icons/md";
 import HireMeModal from "../HireMeModal";
 import useThemeSwitcher from "../../hooks/useThemeSwitcher";
 import { usePathname, useRouter } from "next/navigation";
@@ -41,13 +41,13 @@ function AppHeader() {
   const NavLinks = () => (
     <>
       <LinkItem href="/projects" label={t("Projects")} />
-      <LinkItem href="/about" label={t("Contact")} />
-      <LinkItem href="/contact" label={t("About Me")} />
+      <LinkItem href="/contact" label={t("Contact")} />
+      <LinkItem href="/about" label={t("About Me")} />
     </>
   );
 
   const LinkItem = ({ href, label }) => (
-    <div className="block text-xl font-semibold m-6 group relative w-max dark:text-ternary-light dark:hover:text-indigo-400 hover:text-indigo-400 text-indigo-800 duration-200">
+    <div className="block text-xl font-semibold m-6 mb-3 group relative w-max dark:text-ternary-light dark:hover:text-indigo-400 hover:text-indigo-400 text-indigo-800 duration-200">
       <Link href={href} aria-label={label}>
         {label}
       </Link>
@@ -96,7 +96,7 @@ function AppHeader() {
               )}
             </div>
             <div className="flex items-center">
-              <SiGoogletranslate className="text-xl dark:text-gray-200 text-gray-900" />
+              <MdLanguage className="text-2xl dark:text-gray-200 text-gray-900" />
               <select
                 name="language"
                 id="language"
@@ -151,7 +151,7 @@ function AppHeader() {
           </button>
 
           <div className="flex items-center ">
-            <SiGoogletranslate className="text-xl dark:text-gray-200 text-gray-900" />
+            <MdLanguage className="text-2xl dark:text-gray-200 text-gray-900" />
             <select
               name="language"
               id="language"

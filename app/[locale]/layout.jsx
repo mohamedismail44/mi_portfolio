@@ -6,7 +6,10 @@ import { ToastContainer } from "react-toastify";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
-
+export const metadata = {
+  title: "Mohamed Ismail Portfolio",
+  description: "Fullstack Development",
+};
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {

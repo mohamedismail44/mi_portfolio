@@ -7,6 +7,7 @@ import {
 } from "react-icons/fi";
 import AppFooterCopyright from "./AppFooterCopyright";
 import NewsletterSignUp from "../NewsletterSignUp";
+import { useTranslations } from "next-intl";
 
 const socialLinks = [
   {
@@ -37,6 +38,8 @@ const socialLinks = [
 ];
 
 function AppFooter() {
+  const t = useTranslations("footer");
+
   return (
     <div className=" dark:bg-ternary-dark bg-gray-50">
       <div className="container mx-auto">
@@ -45,7 +48,7 @@ function AppFooter() {
           {/* Footer social links */}
           <div className="font-general-regular flex flex-col justify-center items-center mb-10 sm:mb-7">
             <p className="text-3xl sm:text-4xl text-primary-dark dark:text-primary-light mb-2">
-              Follow me
+              {t("followMe")}
             </p>
             <ul className="flex gap-4 sm:gap-8">
               {socialLinks.map((link) => (

@@ -1,7 +1,66 @@
 {
   "navbar": {
+    "home": "Home",
     "Projects": "Projects",
     "About Me": "About Me",
     "Contact": "Contact"
+  },
+  "banner": {
+    "title": "Get Your Website Now!",
+    "discription": "Using the latest technologies to turn your ideas into a website that suits your business needs. You'll get a professional design that features:",
+    "point1": "🔹Easy to use",
+    "point2": "🔹Fully responsive on all devices",
+    "point3": "🔹SEO friendly",
+    "hireMe": "Hire Me"
+  },
+  "projects": {
+    "title": "My Work Portfolio",
+    "discription": "You can search for a specific project or choose a category.",
+    "search": "Search for a project",
+    "moreProjects": "More Projects",
+    "hireMe": "Hire Me"
+  },
+  "emailSubiscribe": {
+    "title": "Subscribe",
+    "discription": "Be the first to know about my latest projects and work. If you're interested, please enter your email below!",
+    "email": "Enter your email",
+    "button": "Subscribe"
+  },
+  "hireMe": {
+    "title": "Please enter your website details below",
+    "name": "Name",
+    "email": "Email",
+    "discription": "Project Description",
+    "button": "Submit Request",
+    "close": "Close"
+  },
+  "footer": {
+    "title": "All rights reserved to the platform, ",
+    "followMe": "Follow Me"
+  },
+  "advantage": {
+    "title": "Awesome Features",
+    "title1": "Mobile Friendly",
+    "description1": "Enjoy a responsive web design and a mobile-compatible website.",
+
+    "title2": "Built with Latest Technologies",
+    "description2": "Web app development using Next.js, Node.js, and Tailwind CSS.",
+
+    "title3": "Quality Assurance Before Delivery",
+    "description3": "Thorough review and full testing to ensure quality before final delivery.",
+
+    "title4": "Search Engine Optimization (SEO)",
+    "description4": "Using advanced SEO tools to boost visibility in search results.",
+
+    "title5": "Free Hosting",
+    "description5": "Utilizing free services like Firebase and Supabase to host small projects at no cost.",
+
+    "title6": "After-Sales Service",
+    "description6": "Ongoing support to ensure customer satisfaction after project delivery."
+  },
+  "HeroSection": {
+    "title": "Why Choose Us?",
+    "description1": "We offer 24/7 continuous support to meet your needs anytime. We use the latest technologies powered by AI to develop high-quality web applications, with extensive experience that ensures outstanding results. We provide competitive prices to fit all budgets, along with free consultations to help you make the right decision for your project.",
+    "description2": "We believe in the importance of after-sales service. We work hard to ensure customer satisfaction through continuous support and effective communication. Your satisfaction is our top priority and the key to our success. Choose us because we are committed to delivering innovative and efficient solutions that meet your needs and exceed your expectations."
   }
 }

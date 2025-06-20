@@ -2,9 +2,12 @@
 import { useState } from "react";
 import { postData } from "../backend/controllers";
 import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
 
 const NewsletterSignUp = () => {
   const [email, setEmail] = useState("");
+    const t = useTranslations("emailSubiscribe");
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email.trim() === "") {
@@ -24,11 +27,10 @@ const NewsletterSignUp = () => {
       <div className="py-8 px-4 mx-auto max-w-screen-xl  lg:px-6">
         <div className="mx-auto max-w-screen-md sm:text-center">
           <h2 className="mb-2 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">
-            Sign up for our newsletter
+              {t("title")} 
           </h2>
           <p className="mx-auto mb-3 max-w-2xl font-light text-gray-500 md:mb-4 sm:text-xl dark:text-ternary-light">
-            Be the first to know about my latest projects and work. If you&apos;re
-            interested, please enter your email below!
+           {t("discription")} 
           </p>
           <form onSubmit={handleSubmit}>
             <div className=" items-center mx-auto space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
@@ -37,7 +39,7 @@ const NewsletterSignUp = () => {
                   htmlFor="email"
                   className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  Email address
+                  {t("email")}
                 </label>
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                   <svg
@@ -52,7 +54,7 @@ const NewsletterSignUp = () => {
                 </div>
                 <input
                   className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Enter your email"
+                  placeholder={t("email")}
                   type="email"
                   id="email"
                   required
@@ -63,9 +65,9 @@ const NewsletterSignUp = () => {
               <div>
                 <button
                   type="submit"
-                  className="py-3 px-5 w-full text-sm font-medium text-center text-white  border cursor-pointer  border-indigo-600 sm:rounded-none  hover:bg-primary-800 focus:ring-4 focus:ring-indigo-300 bg-indigo-500 hover:bg-indigo-600 shadow-sm duration-300"
+                  className="py-2 px-5 w-full text-lg font-bold text-center text-white  border cursor-pointer  border-indigo-600 sm:rounded-none  hover:bg-primary-800 focus:ring-4 focus:ring-indigo-300 bg-indigo-500 hover:bg-indigo-600 shadow-sm duration-300"
                 >
-                  Subscribe
+                  {t("button")}
                 </button>
               </div>
             </div>

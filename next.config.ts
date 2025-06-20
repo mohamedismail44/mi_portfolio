@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+    domains: ["demo.themesberg.com"],
   },
 };
 const withNextIntl = createNextIntlPlugin();

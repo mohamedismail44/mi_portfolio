@@ -5,12 +5,14 @@ import { toast } from "react-toastify";
 import { postData } from "../backend/controllers";
 import { motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 const HireMeModal = ({ onClose }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const t = useTranslations("hireMe");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -60,7 +62,7 @@ const HireMeModal = ({ onClose }) => {
           <div className="modal max-w-md mx-5 xl:max-w-xl lg:max-w-xl md:max-w-xl bg-secondary-light dark:bg-primary-dark max-h-screen shadow-lg flex-row rounded-lg relative">
             <div className="modal-header flex justify-between gap-10 p-5 border-b border-ternary-light dark:border-ternary-dark">
               <h5 className=" text-primary-dark dark:text-primary-light text-xl">
-                What project are you looking for?
+                {t("title")}
               </h5>
               <button
                 onClick={onClose}
@@ -78,7 +80,7 @@ const HireMeModal = ({ onClose }) => {
                     name="name"
                     type="text"
                     required
-                    placeholder="Name"
+                    placeholder={t("name")}
                     aria-label="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -91,7 +93,7 @@ const HireMeModal = ({ onClose }) => {
                     name="email"
                     type="text"
                     required
-                    placeholder="Email"
+                    placeholder={t("email")}
                     aria-label="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -106,7 +108,7 @@ const HireMeModal = ({ onClose }) => {
                     cols="14"
                     rows="6"
                     aria-label="Details"
-                    placeholder="Project description"
+                    placeholder={t("discription")}
                     required
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -136,7 +138,7 @@ const HireMeModal = ({ onClose }) => {
                         ariaLabel="three-circles-loading"
                       />
                     ) : (
-                      "Send Request"
+                      t("button")
                     )}
                   </button>
                 </div>
@@ -152,7 +154,7 @@ const HireMeModal = ({ onClose }) => {
 									focus:ring-1 focus:ring-indigo-900 duration-500"
                 aria-label="Close Modal"
               >
-                Close
+                {t("close")}
               </button>
             </div>
           </div>

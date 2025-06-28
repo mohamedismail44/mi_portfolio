@@ -3,6 +3,7 @@ import { useState } from "react";
 import { postData } from "../../backend/controllers";
 import { ThreeCircles } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ const ContactForm = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const t = useTranslations("contact");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -46,32 +48,32 @@ const ContactForm = () => {
       <div className="leading-loose">
         <form
           onSubmit={submitHandler}
-          className="max-w-xl m-4 p-6 sm:p-10 bg-secondary-light dark:bg-secondary-dark rounded-xl shadow-xl text-left"
+          className=" m-4 p-6 sm:p-10 bg-secondary-light dark:bg-secondary-dark rounded-xl shadow-xl text-left"
         >
           <p className="font-general-medium text-primary-dark dark:text-primary-light text-2xl mb-8">
-            Contact Form
+            {t("contactForm")}
           </p>
 
           <div className="font-general-regular mb-4">
             <label className="block text-lg text-primary-dark dark:text-primary-light mb-1">
-              Full Name
+              {t("fullName")}
             </label>
             <input
               className="w-full px-5 py-2 border border-gray-300 dark:border-primary-dark border-opacity-50 text-primary-dark dark:text-secondary-light bg-ternary-light dark:bg-ternary-dark rounded-md shadow-sm text-md"
               type="text"
-              placeholder="Full Name"
+              placeholder={t("fullName")}
               onChange={(e) => setName(e.target.value)}
               value={name}
             />
           </div>
           <div className="font-general-regular mb-4">
             <label className="block text-lg text-primary-dark dark:text-primary-light mb-1">
-              Email
+              {t("email")}
             </label>
             <input
               className="w-full px-5 py-2 border border-gray-300 dark:border-primary-dark border-opacity-50 text-primary-dark dark:text-secondary-light bg-ternary-light dark:bg-ternary-dark rounded-md shadow-sm text-md"
               type="text"
-              placeholder="Email"
+              placeholder={t("email")}
               required
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -79,12 +81,12 @@ const ContactForm = () => {
           </div>
           <div className="font-general-regular mb-4">
             <label className="block text-lg text-primary-dark dark:text-primary-light mb-1">
-              Subject
+              {t("subject")}
             </label>
             <input
               className="w-full px-5 py-2 border border-gray-300 dark:border-primary-dark border-opacity-50 text-primary-dark dark:text-secondary-light bg-ternary-light dark:bg-ternary-dark rounded-md shadow-sm text-md"
               type="text"
-              placeholder="Subject"
+              placeholder={t("subject")}
               onChange={(e) => setSubject(e.target.value)}
               value={subject}
             />
@@ -95,12 +97,12 @@ const ContactForm = () => {
               className="block text-lg text-primary-dark dark:text-primary-light mb-2"
               htmlFor="message"
             >
-              Message
+              {t("message")}
             </label>
             <textarea
               className="w-full px-5 py-2 border border-gray-300 dark:border-primary-dark border-opacity-50 text-primary-dark dark:text-secondary-light bg-ternary-light dark:bg-ternary-dark rounded-md shadow-sm text-md"
               id="message"
-              name="message"
+              name={t("message")}
               cols="14"
               rows="6"
               aria-label="Message"
@@ -120,7 +122,7 @@ const ContactForm = () => {
                   ariaLabel="three-circles-loading"
                 />
               ) : (
-                "Send Message"
+                t("button")
               )}
             </button>
           </div>

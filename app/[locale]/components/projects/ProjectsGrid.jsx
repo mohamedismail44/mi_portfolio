@@ -7,10 +7,12 @@ import { getData } from "../../backend/controllers";
 import { ThreeCircles } from "react-loader-spinner";
 import { useTranslations } from "next-intl";
 
-function ProjectsGrid() {
+function ProjectsGrid({ showPagination }) {
   const [searchProject, setSearchProject] = useState("");
   const [selectProject, setSelectProject] = useState("");
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
   const t = useTranslations("projects");
 
   useEffect(() => {
@@ -45,6 +47,12 @@ function ProjectsGrid() {
     return titleMatch && categoryMatch;
   });
 
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
+  const currentProjects = filteredProjects.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <section className="py-5 sm:py-10 mt-5 sm:mt-10">
       <div className="text-center">
@@ -53,7 +61,7 @@ function ProjectsGrid() {
         </p>
       </div>
 
-      <div className="">
+      <div>
         <h3 className="font-general-regular text-center text-secondary-dark dark:text-ternary-light text-md sm:text-xl mb-3">
           {t("discription")}
         </h3>
@@ -76,10 +84,40 @@ function ProjectsGrid() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 sm:gap-5 justify-items-center">
-        {filteredProjects.slice(0,6).map((project, index) => (
+        {currentProjects.map((project, index) => (
           <ProjectSingle key={index} {...project} />
         ))}
       </div>
+
+      {showPagination && (
+        <div className="flex justify-center items-center gap-5 mt-10">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 mx-1   ${
+              currentPage === 1
+                ? "bg-gray-500"
+                : "bg-primaryColor-500 hover:bg-secondaryColor-600 duration-300 "
+            }  text-white rounded`}
+          >
+            {t("perview")}
+          </button>
+          <span>{`صفحة ${currentPage} من ${totalPages}`}</span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 mx-1   ${
+              currentPage === totalPages
+                ? "bg-gray-500"
+                : "bg-primaryColor-500 hover:bg-secondaryColor-600 duration-300 "
+            }  text-white rounded`}
+          >
+            {t("next")}
+          </button>
+        </div>
+      )}
     </section>
   );
 }

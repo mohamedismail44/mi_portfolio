@@ -30,7 +30,7 @@ function AppBanner() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.9, delay: 0.2 }}
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden "
+      className="relative w-full py-5 flex items-center justify-center overflow-hidden "
     >
       {/* خلفية Particles */}
       <div className="absolute inset-0 z-0">

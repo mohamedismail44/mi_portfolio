@@ -7,21 +7,23 @@
   },
   "banner": {
     "title": "Get Your Website Now!",
-    "discription": "Using the latest technologies to turn your ideas into a website that suits your business needs. You'll get a professional design that features:",
-    "point1": "🔹Easy to use",
-    "point2": "🔹Fully responsive on all devices",
-    "point3": "🔹SEO friendly",
-    "hireMe": "Hire Me"
+    "discription": "Use the latest programming technologies to turn your ideas into a website that meets your business or commercial needs. You will get a professional design that features:",
+    "point1": "🔹 Easy to use",
+    "point2": "🔹 Fully responsive on all devices",
+    "point3": "🔹 SEO-friendly",
+    "hireMe": "Order Your Website"
   },
   "projects": {
-    "title": "My Work Portfolio",
-    "discription": "You can search for a specific project or choose a category.",
+    "title": "My Projects",
+    "discription": "You can search for a specific project or choose a category",
     "search": "Search for a project",
     "moreProjects": "More Projects",
-    "hireMe": "Hire Me"
+    "hireMe": "Order Your Website",
+    "next": "Next",
+    "perview": "Previous"
   },
   "emailSubiscribe": {
-    "title": "Subscribe",
+    "title": "Subscribe Now",
     "discription": "Be the first to know about my latest projects and work. If you're interested, please enter your email below!",
     "email": "Enter your email",
     "button": "Subscribe"
@@ -31,7 +33,7 @@
     "name": "Name",
     "email": "Email",
     "discription": "Project Description",
-    "button": "Submit Request",
+    "button": "Send Request",
     "close": "Close"
   },
   "footer": {
@@ -40,27 +42,42 @@
   },
   "advantage": {
     "title": "Awesome Features",
-    "title1": "Mobile Friendly",
+    "title1": "Mobile-Friendly",
     "description1": "Enjoy a responsive web design and a mobile-compatible website.",
-
-    "title2": "Built with Latest Technologies",
-    "description2": "Web app development using Next.js, Node.js, and Tailwind CSS.",
-
+    "title2": "Built with Modern Technologies",
+    "description2": "Web applications developed using Next.js, Node.js, and Tailwind CSS.",
     "title3": "Quality Assurance Before Delivery",
-    "description3": "Thorough review and full testing to ensure quality before final delivery.",
-
+    "description3": "Comprehensive review and full testing of the project before final delivery.",
     "title4": "Search Engine Optimization (SEO)",
     "description4": "Using advanced SEO tools to boost visibility in search results.",
-
     "title5": "Free Hosting",
-    "description5": "Utilizing free services like Firebase and Supabase to host small projects at no cost.",
-
+    "description5": "Benefit from free services like Firebase and Supabase to host small projects at no cost.",
     "title6": "After-Sales Service",
     "description6": "Ongoing support to ensure customer satisfaction after project delivery."
   },
   "HeroSection": {
     "title": "Why Choose Us?",
-    "description1": "We offer 24/7 continuous support to meet your needs anytime. We use the latest technologies powered by AI to develop high-quality web applications, with extensive experience that ensures outstanding results. We provide competitive prices to fit all budgets, along with free consultations to help you make the right decision for your project.",
-    "description2": "We believe in the importance of after-sales service. We work hard to ensure customer satisfaction through continuous support and effective communication. Your satisfaction is our top priority and the key to our success. Choose us because we are committed to delivering innovative and efficient solutions that meet your needs and exceed your expectations."
+    "description1": "We provide 24/7 support to ensure your needs are met at any time. We use the latest AI-powered programming technologies to build high-quality web applications, backed by extensive experience in the field to guarantee outstanding results. We offer competitive prices for all budgets and free consultations to help you make the right decision for your project.",
+    "description2": "We believe in the importance of after-sales service, working hard to ensure customer satisfaction through continuous support and effective communication. Your satisfaction is our top priority and the key to our success. Choose us for innovative and effective solutions that meet your needs and exceed your expectations."
+  },
+  "contact": {
+    "contactForm": "Contact Us",
+    "fullName": "Full Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Write your message",
+    "button": "Send Message"
+  },
+  "about": {
+    "text1": "Hi, I'm Mohamed Ismail, an engineer and programmer passionate about development and coding. I have over 3 years of experience in this field, working on various projects from e-commerce sites to landing pages and blogs, as well as large-scale websites.",
+    "point1": "HTML & CSS: To build attractive user interfaces.",
+    "point2": "JavaScript: To add interactivity and intelligence to websites.",
+    "point3": "Tailwind & Bootstrap: For fast and flexible UI design.",
+    "point4": "Node.js & Express.js: To build scalable web applications.",
+    "point5": "MongoDB & MySQL: For efficient database management.",
+    "point6": "React.js & Next.js: To create modern and fast web apps.",
+    "point7": "Sass, Firebase & Supabase: To enhance the development experience.",
+    "text2": "I love challenges and always strive to learn new technologies. I believe programming is not just a job, but an art that requires creativity and precision. If you're looking for a committed and creative developer, feel free to reach out to me.",
+    "text3": "Let's build something amazing together!"
   }
 }

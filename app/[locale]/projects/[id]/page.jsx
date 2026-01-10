@@ -5,7 +5,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 import { getDataById } from "../../backend/controllers";
 import { ThreeCircles } from "react-loader-spinner";
 import Image from "next/image"; // استيراد مكون Image
@@ -14,7 +14,7 @@ import { useLocale } from "next-intl";
 export default function CustomSwiper({ params }) {
   const [singlePost, setSinglePost] = useState(null);
   const postID = use(params).id;
-  const locale = useLocale();
+  // const locale = useLocale();
 
   useEffect(() => {
     getDataById("posts", postID, setSinglePost);

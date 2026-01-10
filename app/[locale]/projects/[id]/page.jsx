@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import { getDataById } from "../../backend/controllers";
 import { ThreeCircles } from "react-loader-spinner";
 import Image from "next/image"; // استيراد مكون Image
-import { useLocale } from "next-intl";
+// import { useLocale } from "next-intl";
 
 export default function CustomSwiper({ params }) {
   const [singlePost, setSinglePost] = useState(null);

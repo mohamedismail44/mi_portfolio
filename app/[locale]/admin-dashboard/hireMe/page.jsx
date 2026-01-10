@@ -1,7 +1,7 @@
 "use client";
 import AdminSidbar from "../components/AdminSidbar";
 import { useEffect, useState } from "react";
-import { getData } from "../../backend/controllers";
+import { getData2 } from "../../backend/controllers";
 import { useAuthListener } from "../../backend/checkUser";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +16,7 @@ export default function UsersDashboard() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getData("hireMe", setData);
+    getData2("hireMe", setData);
   }, []);
   if (loading) {
     return <p className="text-center">جاري التحقق...</p>;
@@ -35,6 +35,9 @@ export default function UsersDashboard() {
               <th className="border border-gray-500 lg:p-3 text-center">#</th>
               <th className="border border-gray-500 lg:p-3 text-center">
                 Name
+              </th>
+              <th className="border border-gray-500 lg:p-3 text-center">
+                Phone number
               </th>
               <th className="border border-gray-500 lg:p-3 text-center">
                 Email
@@ -56,6 +59,10 @@ export default function UsersDashboard() {
                 <td className="border py-1 px-5 border-gray-500">
                   <div className="line-clamp-2 flex items-center lg:flex-row lg:justify-start justify-center flex-col gap-2">
                     <span>{post?.name}</span>
+                  </div>
+                </td>  <td className="border py-1 px-5 border-gray-500">
+                  <div className="line-clamp-2 flex items-center lg:flex-row lg:justify-start justify-center flex-col gap-2">
+                    <span>{post?.phoneNumber}</span>
                   </div>
                 </td>
                 <td className="p-1 border border-gray-500 text-center">

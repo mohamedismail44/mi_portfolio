@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getData } from "../../backend/controllers";
+import { getData2 } from "../../backend/controllers";
 import AdminSidbar from "../components/AdminSidbar";
 import { useAuthListener } from "../../backend/checkUser";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ export default function EmailSubscribe() {
   const [emails, setEmails] = useState([]);
 
   useEffect(() => {
-    getData("emailSubscribe", setEmails);
+    getData2("emailSubscribe", setEmails);
   }, []);
   if (loading) {
     return <p className="text-center">جاري التحقق...</p>;

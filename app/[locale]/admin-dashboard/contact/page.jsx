@@ -2,7 +2,7 @@
 
 import AdminSidbar from "../components/AdminSidbar";
 import { useEffect, useState } from "react";
-import { getData } from "../../backend/controllers";
+import { getData2 } from "../../backend/controllers";
 import { useAuthListener } from "../../backend/checkUser";
 import { useRouter } from "next/navigation";
 
@@ -19,7 +19,7 @@ export default function UsersDashboard() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getData("contact", setData);
+    getData2("contact", setData);
   }, []);
 
   if (loading) {

@@ -10,6 +10,7 @@ import useThemeSwitcher from "../../hooks/useThemeSwitcher";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
+import Image from "next/image";
 
 function AppHeader() {
   const [showMenu, setShowMenu] = useState(false);
@@ -82,17 +83,18 @@ function AppHeader() {
             : "bg-transparent"
         }`}
       >
-        <div className="z-10 block lg:flex lg:justify-between lg:items-center py-4 max-w-screen-xl mx-auto">
+        <div className="z-10 block lg:flex lg:justify-between lg:items-center py-2 max-w-screen-xl mx-auto">
           {/* Logo + Mobile Controls */}
           <div className="flex justify-between items-center">
             <Link href="/">
-              <div>
-                <span className="uppercase font-bold md:text-5xl text-4xl text-primaryColor-500">
-                  𝒨𝒾
-                </span>
-                <span className="ml-1 font-bold md:text-3xl text-2xl text-secondaryColor-600 dark:text-indigo-300">
-                  Portfolio
-                </span>
+              <div className="">
+                <Image
+                  src="/images/almubarmij-logo.png"
+                  alt="Developer"
+                  width={140}
+                  height={140}
+                  className="object-contain"
+                />
               </div>
             </Link>
 
@@ -147,7 +149,7 @@ function AppHeader() {
               className="text-md font-general-medium bg-primaryColor-500 hover:bg-secondaryColor-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
               aria-label="Hire Me Button"
             >
-              Hire Me
+              {t("hireMe")}
             </button>
 
             <div className="flex items-center">
@@ -216,7 +218,7 @@ function AppHeader() {
                       className="font-general-medium block text-md bg-primaryColor-500 hover:bg-secondaryColor-600 text-white shadow-sm rounded-sm px-4 py-2 mt-2 duration-300 w-full"
                       aria-label="Hire Me Button"
                     >
-                      Hire Me
+                      {t("hireMe")}
                     </button>
                   </div>
 

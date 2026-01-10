@@ -4,7 +4,7 @@ import { FiArrowDownCircle } from "react-icons/fi";
 import useThemeSwitcher from "../../hooks/useThemeSwitcher";
 import { useState } from "react";
 import HireMeModal from "../HireMeModal";
-import ParticlesContainer from "../ParticlesContainer";
+// import ParticlesContainer from "../ParticlesContainer";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -32,10 +32,10 @@ function AppBanner() {
       transition={{ ease: "easeInOut", duration: 0.9, delay: 0.2 }}
       className="relative w-full py-5 flex items-center justify-center overflow-hidden "
     >
-      {/* خلفية Particles */}
+      {/* خلفية Particles
       <div className="absolute inset-0 z-0">
         <ParticlesContainer />
-      </div>
+      </div> */}
 
       {/* المحتوى فوق الخلفية */}
       <div className="relative z-10 flex flex-col sm:justify-between items-center sm:flex-row mt-5 md:mt-2 w-full px-4">
@@ -52,7 +52,7 @@ function AppBanner() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ ease: "easeInOut", duration: 0.9, delay: 0.2 }}
-            className={` capitalize font-general-medium mt-4 text-xl lg:text-2xl xl:text-3xl  leading-normal text-gray-600 dark:text-gray-200
+            className={` capitalize font-general-medium mt-4 text-xl xl:text-2xl  leading-normal text-gray-600 dark:text-gray-200
               ${locale === "ar" ? "text-right" : "text-left"}
               `}
           >
@@ -72,11 +72,11 @@ function AppBanner() {
           >
             <button
               onClick={showHireMeModal}
-              className="font-general-medium flex justify-center items-center w-36 sm:w-48 mt-12 mb-6 sm:mb-0 text-lg border border-indigo-200 dark:border-ternary-dark py-2.5 sm:py-3 shadow-lg rounded-lg bg-indigo-50 focus:ring-1 focus:ring-indigo-900 hover:bg-indigo-500 text-gray-500 hover:text-white duration-500"
               aria-label="Hire Me Button"
+              className="bg-gradient-to-r flex justify-center items-center gap-2 from-purple-500 to-primaryColor-500 text-white font-semibold py-3 px-2 mt-5 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
             >
-              <FiArrowDownCircle className="ml-1 mr-2 sm:mr-3 h-5 w-5 sm:w-6 sm:h-6 duration-100" />
-              <span className="text-lg duration-100">  {t("hireMe")}</span>
+              <FiArrowDownCircle className="text-2xl" />
+              <span className="text-lg"> {t("hireMe")}</span>
             </button>
           </motion.div>
         </div>

@@ -3,7 +3,8 @@
     "home": "Home",
     "Projects": "Projects",
     "About Me": "About Me",
-    "Contact": "Contact"
+    "Contact": "Contact",
+    "hireMe": "Hire Me"
   },
   "banner": {
     "title": "Get Your Website Now!",
@@ -31,6 +32,7 @@
   "hireMe": {
     "title": "Please enter your website details below",
     "name": "Name",
+    "phoneNumber": "Phone Number",
     "email": "Email",
     "discription": "Project Description",
     "button": "Send Request",

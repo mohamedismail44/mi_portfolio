@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 
 const HireMeModal = ({ onClose }) => {
   const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -18,18 +19,21 @@ const HireMeModal = ({ onClose }) => {
     e.preventDefault();
 
     if (name.trim() === "") return toast.error("name is required");
+    if (phoneNumber.trim() === "") return toast.error("email is required");
     if (email.trim() === "") return toast.error("email is required");
     if (message.trim() === "") return toast.error("message is required");
     try {
       setIsUploading(true);
       const data = {
         name,
+        phoneNumber,
         email,
         message,
       };
 
       await postData("hireMe", data);
       setName("");
+      setPhoneNumber("");
       setEmail("");
       setMessage("");
       toast.success(
@@ -58,7 +62,7 @@ const HireMeModal = ({ onClose }) => {
 
       {/* Modal Content */}
       <main className="flex flex-col items-center justify-center h-full w-full">
-        <div className="modal-wrapper flex items-center z-30">
+        <div className="modal-wrapper flex items-center z-50">
           <div className="modal max-w-md mx-5 xl:max-w-xl lg:max-w-xl md:max-w-xl bg-secondary-light dark:bg-primary-dark max-h-screen shadow-lg flex-row rounded-lg relative">
             <div className="modal-header flex justify-between gap-10 p-5 border-b border-ternary-light dark:border-ternary-dark">
               <h5 className=" text-primary-dark dark:text-primary-light text-xl">
@@ -68,7 +72,7 @@ const HireMeModal = ({ onClose }) => {
                 onClick={onClose}
                 className="px-4 font-bold text-primary-dark dark:text-primary-light"
               >
-                <FiX className="text-3xl" />
+                <FiX className="text-3xl text-red-600" />
               </button>
             </div>
             <div className="modal-body p-5 w-full h-full">
@@ -86,12 +90,28 @@ const HireMeModal = ({ onClose }) => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
+
+                <div className="mt-6">
+                  <input
+                    className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+                    w-full px-5 py-2 border dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
+                    id="phoneNumber"
+                    name="PhoneNumber"
+                    type="number"
+                    required
+                    placeholder={t("phoneNumber")}
+                    aria-label="PhoneNumber"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+
                 <div className="mt-6">
                   <input
                     className="w-full px-5 py-2 border dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
                     id="email"
                     name="email"
-                    type="text"
+                    type="email"
                     required
                     placeholder={t("email")}
                     aria-label="Email"
@@ -99,7 +119,6 @@ const HireMeModal = ({ onClose }) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-
                 <div className="mt-6">
                   <textarea
                     className="w-full px-5 py-2 border dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
@@ -114,7 +133,6 @@ const HireMeModal = ({ onClose }) => {
                     onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
-
                 <div className="mt-6 pb-4 sm:pb-1">
                   <button
                     type="submit"
@@ -144,7 +162,7 @@ const HireMeModal = ({ onClose }) => {
                 </div>
               </form>
             </div>
-            <div className="modal-footer mt-2 sm:mt-0 py-5 px-8 border0-t text-right">
+            <div className="modal-footer sm:mt-0 py-5 px-8 border0-t text-right">
               <button
                 onClick={onClose}
                 className="px-4

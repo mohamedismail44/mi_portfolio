@@ -7,7 +7,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 export const metadata = {
-  title: "Mohamed Ismail Portfolio",
+  title: "ALMUBARMIJ",
   description: "Fullstack Development",
 };
 export default async function RootLayout({ children, params }) {

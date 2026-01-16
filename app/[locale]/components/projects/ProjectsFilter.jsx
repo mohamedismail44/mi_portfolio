@@ -45,7 +45,7 @@ function ProjectsFilter({ setSelectProject }) {
         <option
           className="text-normal sm:text-md"
           key={option.id}
-          value={locale === "ar" ? option.title.ar : option.title.en}
+          value={option.title.en}
         >
           {locale === "ar" ? option.title.ar : option.title.en}
         </option>

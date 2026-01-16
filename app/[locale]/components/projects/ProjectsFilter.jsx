@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { getData } from "../../backend/controllers";
+import { useLocale } from "next-intl";
 
 function ProjectsFilter({ setSelectProject }) {
   const [category, setCategory] = useState([]);
+  const locale = useLocale();
 
   useEffect(() => {
     getData("category", setCategory);
@@ -36,16 +38,16 @@ function ProjectsFilter({ setSelectProject }) {
     >
       {/* قيمة الخيار "All Projects" تتطلب قيمة معينة لتمييزها */}
       <option value="all" className="text-sm sm:text-md">
-        All Projects
+        {locale === "ar" ? "جميع المشروعات" : "All Projects"}
       </option>
 
       {category.map((option) => (
         <option
           className="text-normal sm:text-md"
           key={option.id}
-          value={option.title.en}
+          value={locale === "ar" ? option.title.ar : option.title.en}
         >
-          {option.title.en}
+          {locale === "ar" ? option.title.ar : option.title.en}
         </option>
       ))}
     </select>

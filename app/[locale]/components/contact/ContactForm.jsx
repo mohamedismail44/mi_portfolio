@@ -32,12 +32,9 @@ const ContactForm = () => {
       setEmail("");
       setSubject("");
       setMessage("");
-      toast.success("Your request has been sent successfully");
+      toast.success(t("submitMessage"));
     } catch (error) {
-      toast.error(
-        "An error occurred while submitting your request.",
-        error.message
-      );
+      toast.error(t("submitMessageError"), error.message);
     } finally {
       setIsUploading(false);
     }

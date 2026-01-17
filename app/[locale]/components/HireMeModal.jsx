@@ -36,14 +36,9 @@ const HireMeModal = ({ onClose }) => {
       setPhoneNumber("");
       setEmail("");
       setMessage("");
-      toast.success(
-        "Your request has been sent successfully and you will be replied to as soon as possible."
-      );
+      toast.success(t("submitMessage"));
     } catch (error) {
-      toast.error(
-        "An error occurred while submitting your request.",
-        error.message
-      );
+      toast.error(t("submitMessageError"), error.message);
     } finally {
       setIsUploading(false);
       onClose();
@@ -55,7 +50,7 @@ const HireMeModal = ({ onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="font-general-medium fixed inset-0 z-30 transition-all duration-500"
+      className="font-general-medium fixed inset-0 z-[9999] transition-all duration-500"
     >
       {/* Modal Backdrop */}
       <div className="bg-filter bg-black bg-opacity-50 fixed inset-0 w-full h-full z-20"></div>

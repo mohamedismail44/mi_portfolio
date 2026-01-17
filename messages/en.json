@@ -36,7 +36,9 @@
     "email": "Email",
     "discription": "Project Description",
     "button": "Send Request",
-    "close": "Close"
+    "close": "Close",
+    "submitMessage": "Your request has been sent successfully and you will be replied to as soon as possible",
+    "submitMessageError": "An error occurred while submitting your request"
   },
   "footer": {
     "title": "All rights reserved to the platform, ",
@@ -68,7 +70,9 @@
     "email": "Email",
     "subject": "Subject",
     "message": "Write your message",
-    "button": "Send Message"
+    "button": "Send Message",
+    "submitMessage": "Your request has been sent successfully and you will be replied to as soon as possible",
+    "submitMessageError": "An error occurred while submitting your request"
   },
   "about": {
     "text1": "Hi, I'm Mohamed Ismail, an engineer and programmer passionate about development and coding. I have over 3 years of experience in this field, working on various projects from e-commerce sites to landing pages and blogs, as well as large-scale websites.",

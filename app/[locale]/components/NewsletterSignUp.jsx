@@ -3,22 +3,29 @@ import { useState } from "react";
 import { postData } from "../backend/controllers";
 import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 const NewsletterSignUp = () => {
   const [email, setEmail] = useState("");
-    const t = useTranslations("emailSubiscribe");
-  
+  const t = useTranslations("emailSubiscribe");
+  const locale = useLocale();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email.trim() === "") {
-      return toast.error("Category is required");
+      return toast.error(locale === "ar" ? "الحقل مطلوب" : "Email is required");
     }
     try {
       postData("emailSubscribe", { email });
       setEmail("");
-      toast.success("send email successfully");
+      toast.success(
+        locale === "ar" ? " تم ارسال ايميلك بنجاح" : "send email successfully"
+      );
     } catch (error) {
-      toast.error("error send email", error.message);
+      toast.error(
+        locale === "ar" ? "حدث خطأ في ارسال الايميل" : "error send email",
+        error.message
+      );
     }
   };
 
@@ -27,10 +34,10 @@ const NewsletterSignUp = () => {
       <div className="py-8 px-4 mx-auto max-w-screen-xl  lg:px-6">
         <div className="mx-auto max-w-screen-md sm:text-center">
           <h2 className="mb-2 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl dark:text-white">
-              {t("title")} 
+            {t("title")}
           </h2>
           <p className="mx-auto mb-3 max-w-2xl font-light text-gray-500 md:mb-4 sm:text-xl dark:text-ternary-light">
-           {t("discription")} 
+            {t("discription")}
           </p>
           <form onSubmit={handleSubmit}>
             <div className=" items-center mx-auto space-y-4 max-w-screen-sm sm:flex sm:space-y-0">

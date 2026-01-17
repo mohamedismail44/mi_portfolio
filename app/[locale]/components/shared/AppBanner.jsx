@@ -36,7 +36,7 @@ function AppBanner() {
       <div className="absolute inset-0 z-0">
         <ParticlesContainer />
       </div> */}
-
+      {showModal && <HireMeModal onClose={showHireMeModal} />}
       {/* المحتوى فوق الخلفية */}
       <div className="relative z-10 flex flex-col sm:justify-between items-center sm:flex-row mt-5 md:mt-2 w-full px-4">
         <div className="w-full md:w-1/3 text-left">
@@ -98,7 +98,6 @@ function AppBanner() {
             height={500}
           />
         </motion.div>
-        {showModal && <HireMeModal onClose={showHireMeModal} />}
       </div>
     </motion.section>
   );
